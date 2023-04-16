@@ -1,4 +1,6 @@
-from pythonping import ping
+import subprocess
+import json
 
-print("hello world")
-ping('127.0.0.1', verbose=True)
+output = json.loads(subprocess.check_output(['./speedtest', '--format=json-pretty']))
+
+print(output)
