@@ -4,6 +4,8 @@ version: '3.1'
 services:
   db:
     image: influxdb:1.8
+    volumes:
+      - ./volumes/influxdb:/var/lib/influxdb
     restart: always
     environment:
       INFLUXDB_DB: defaultdb
@@ -15,7 +17,8 @@ services:
       - "3000:3000"
     restart: always
     volumes:
-      - ./provisioning:/etc/grafana/provisioning
+      - ./volumes/provisioning:/etc/grafana/provisioning
+      - ./volumes/grafana:/var/lib/grafana
 
   ping:
     image: ping
