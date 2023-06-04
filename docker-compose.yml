@@ -16,7 +16,6 @@ services:
     ports:
       - "3000:3000"
     restart: always
-    user: "root:root"
     volumes:
       - ./volumes/provisioning:/etc/grafana/provisioning
       - ./volumes/grafana:/var/lib/grafana
