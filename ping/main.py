@@ -13,7 +13,7 @@ hosts = [
     "192.168.88.1"
 ]
 
-def ping_with_one_retry(host)
+def ping_with_one_retry(host):
     ping_ms = ping(host, unit="ms", timeout=4)
     if ping_ms is None or ping_ms is False:
         ping_ms = ping(host, unit="ms", timeout=4)
