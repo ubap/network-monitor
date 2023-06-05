@@ -8,15 +8,21 @@ client = InfluxDBClient(host="db", port="8086", username="admin", database="defa
 
 hosts = [
     "8.8.8.8",
-    "wp.pl",
+    "1.1.1.1",
     "192.168.1.1",
     "192.168.88.1"
 ]
 
+def ping_with_one_retry(host)
+    ping_ms = ping(host, unit="ms", timeout=4)
+    if ping_ms is None or ping_ms is False:
+        ping_ms = ping(host, unit="ms", timeout=4)
+    return ping_ms
+
 
 def job(host):
     timestamp = datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).isoformat()
-    ping_ms = ping(host, unit="ms", timeout=4)
+    ping_ms = ping_with_one_retry(host)
     signal = "ping_ms"
     if ping_ms is None:
         signal = "timeout"
